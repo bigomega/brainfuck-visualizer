@@ -5,7 +5,9 @@ var currPos=0,
 	keyPressTimer=0,
 	sId=0,
 	keyFlag=false,
-	soundFlag=false;
+	keyFlags=false,
+	soundFlag=false,
+	helloWorld="++++++++++\n[\n>+++++++\n>++++++++++\n>+++\n>+\n<<<<-\n]\n>++.H\n>+.'e'\n+++++++\n. 'l'\n. 'l'\n+++. 'o'\n>++. ' '\n<<+++++++++++++++. 'W'\n>. 'o'\n+++. 'r'\n------. 'l'\n--------. 'd'\n>+.'!'\n>.'\\n'";
 
 var strip,
 	index,
@@ -51,6 +53,15 @@ stopEdit=function(){
 	$("#compile").addClass("disabled");
 
 	speed=parseInt($("#speed").val())||1000;
+	if(speed<500){
+		speed=500;$("#speed").val(500);
+	}
+
+	$("#alert").hide(500);
+	keyFlags=keyFlag;
+	keyFlag=true;
+
+	$("#keyFlag").hide(500);
 }
 
 stopSim=function(){
@@ -67,6 +78,11 @@ stopSim=function(){
 	$("#compile").removeClass("disabled");
 
 	$("#out").html(out);
+
+	$("#alert").show(500);
+	keyFlag=keyFlags;
+
+	$("#keyFlag").show(500);
 }
 
 reset=function(){
@@ -182,8 +198,8 @@ stripAction=function(w,x,y,z,i,j){
 		return;
 	}
 	//color-main[x] input[y] and out[z] 
-	if(action[w]){
-		temp=action.slice(0,w)+"<span style='color:red;background:yellow'>"+action[w]+"</span>"+action.slice(w+1);
+	if(action[w-1]){
+		temp=action.slice(0,w-1)+"<span style='color:red;background:yellow'>"+action[w-1]+"</span>"+action.slice(w-1+1);
 		$("#action").html(temp);
 	}
 
@@ -206,10 +222,12 @@ stripAction=function(w,x,y,z,i,j){
 	if(main[x]==']' && jumpArr[i] && x==jumpArr[i][0]){
 		//just move to jumparr[i++][1];
 		x=jumpArr[i++][1];
+		w++;
 	}
 	else if(main[x]=='[' && jumpArr2[j] && x==jumpArr2[j][0]){
 		//just move to jumparr2[j++][1];
 		x=jumpArr2[j++][1];
+		w++;
 	}
 	else{
 		if(action[w]==main[x+1] && main[x+1]=='.' || main[x+1]==',' ||main[x+1]=='>' || main[x+1]=='<' || main[x+1]=='+' || main[x+1]=='-'){
@@ -372,12 +390,21 @@ $(document).ready(function(){
 			//down
 			set(--a[currPos]);
 		}
-		else if(event.keyCode==32){
-			//space
-			set(undefined);
+		else if(event.keyCode==16){
+			//Shift
+			set(document.getElementById("inp").value.charCodeAt(0)||0);
 		}
+		else if(event.keyCode==17){
+			//ctrl
+			document.getElementById("out").innerHTML+=String.fromCharCode(a[currPos])||"\n";
+		}
+		return true;
 	});
 });
+
+window.onblur=function(){
+	stopSim();
+}
 
 resetButton=function(){
 	resetFlag=!resetFlag;

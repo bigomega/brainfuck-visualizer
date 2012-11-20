@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<script type="text/javascript" src="../js/control.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/control.js"></script>
 <style type="text/css">
 //.back
 {
@@ -45,7 +45,7 @@ background-image: radial-gradient(circle farthest-corner at center, #D537FC 0%, 
 			<li class="active"><a href="http://twitter.com/bigOmega"><i class="icon-user"></i> AuTh<blink style="text-decoration:blink">Ω</blink>r</a></li>
 		</ul>
 		<ul class="nav pull-right">
-			<li><a href="#"><small>KeyBoard Help</small></a></li>
+			<li><a href="#" onclick="$('#keys').toggle(1000);"><small>KeyBoard Help</small></a></li>
 		</ul>
 	</div>
 </div>
@@ -129,7 +129,7 @@ z-index:
 				<label class="checkbox">
 					<input type="checkbox" value="" checked="checked" onclick="resetButton();"> Auto-Reset strip every-time
 				</label>
-				<label class="checkbox">
+				<label class="checkbox" id="keyFlag">
 					<input type="checkbox" value="" onclick="keyFlag=!keyFlag;"> Disable keyboard movement
 				</label>
 				<label class="checkbox">
@@ -143,11 +143,12 @@ z-index:
 		<div class="span8 well" style="word-wrap: break-word" id="mainWell">
 			<b style="position:relative;top:-5px">Code: &nbsp
 				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val('').focus();"><i class="icon-remove" style="position:relative;top:-2px"></i> Clear</button>
+				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val(helloWorld).focus();">Hello World <i class="icon-qrcode" style="position:relative;top:-2px"></i></button>
 			</b> 
 			<textarea id="main" rows="10" placeholder="The Brain Fuck Code goes here..." style="width:97%;font-size:15px;font-family:Verdana;"></textarea>
 			<br><div id="mainDiv" style="display:none;font-size: 15px; font-family: Verdana;position:relative;top:5px;left:8px;word-wrap: break-word;overflow: auto"></div>
 			<br>
-			<div class="alert">
+			<div class="alert" id="alert">
 				<button type="button" class="close" data-dismiss="alert" onclick="$(this).parent().hide(500);">×</button>
 				<strong>Warning!</strong> Check your code before running, inifinite looping will slow/stop the browser.
     		</div>
@@ -155,18 +156,21 @@ z-index:
 	</div>
 	</div>
 
-			<div class="span3 well" style="min-height:60px">
+			<div class="span3 well" style="min-height:60px" id="outDiv">
 				<label><b>Output:</b></label><hr>
-				<div id="out"><br></div><hr>
+				<div id="out">&nbsp;</div><hr>
+
+				<iframe onload="$(this).width(parseInt($('#outDiv').width()));" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffestalize.com%2FbfVisual&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=segoe+ui&amp;height=21&amp;appId=526351877380323" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-size="small" data-via="bigOmega" data-url="http://festalize.com/bfVisual/" data-text="BrainFuck Compiling Visualization/Simulation in JavaScript">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 			</div>
 
 			<div class="span3 well" style="min-height:60px" id="actionDiv">
-				<label><b>Raw Code: (without looping)</b></label><b>
+				<label><b>Raw Code: (without looping)</b></label><span style="font-style:italic;">
 				<div id="action" style="font-size: 15px; font-family: Verdana;word-wrap: break-word;overflow: auto">
-				</div></b>
+				</div></span>
 			</div>
-			
-	</div>
+		</div>
 	</div>
 </div>
 
@@ -189,12 +193,34 @@ z-index:
 -->
 
 
-<div class="navbar navbar-fixed-bottom">
-	<div class="navbar-inner">
-		<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffestalize.com%2FbfVisual&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=segoe+ui&amp;height=21&amp;appId=526351877380323" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
-	</div>
+<div class="well" style="position:fixed;top:0px;right:0px;display:none;border-radius:17px" onclick="$(this).toggle(1000)" id="keys">
+	<table cellpadding="5px">
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-arrow-left"></i></button></td>
+			<td> Move left (&lt;)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-arrow-right"></i></button></td>
+			<td> Move Right (&gt;)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-arrow-up"></i></button></td>
+			<td> Add (+)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-arrow-down"></i></button></td>
+			<td> Subtract (-)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-eject" style="position:relative;top:-2px;"></i> Shift &nbsp; &nbsp; </button></td>
+			<td> Get Input (,)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini">Ctrl</button></td>
+			<td> Print output (.)</td>
+		</tr>
+	</table>
 </div>
-
 
 <br/><br>
 
