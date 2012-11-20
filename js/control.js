@@ -8,6 +8,8 @@ var currPos=0,
 	keyFlags=false,
 	soundFlag=false,
 	helloWorld="++++++++++\n[\n>+++++++\n>++++++++++\n>+++\n>+\n<<<<-\n]\n>++.H\n>+.'e'\n+++++++\n. 'l'\n. 'l'\n+++. 'o'\n>++. ' '\n<<+++++++++++++++. 'W'\n>. 'o'\n+++. 'r'\n------. 'l'\n--------. 'd'\n>+.'!'\n>.'\\n'";
+	fibonacci="+++++++++++>+>>>>++++++++++++++++++++++++++++++++++++++++++++>++++++++++++++++++++++++++++++++<<<<<<[>[>>>>>>+>+<<<<<<<-]>>>>>>>[<<<<<<<+>>>>>>>-]<[>++++++++++[-<-[>>+>+<<<-]>>>[<<<+>>>-]+<[>[-]<[-]]>[<<[>>>+<<<-]>>[-]]<<]>>>[>>+>+<<<-]>>>[<<<+>>>-]+<[>[-]<[-]]>[<<+>>[-]]<<<<<<<]>>>>>[++++++++++++++++++++++++++++++++++++++++++++++++.[-]]++++++++++<[->-<]>++++++++++++++++++++++++++++++++++++++++++++++++.[-]<<<<<<<<<<<<[>>>+>+<<<<-]>>>>[<<<<+>>>>-]<-[>>.>.<<<[-]]<<[>>+>+<<<-]>>>[<<<+>>>-]<<[<+>-]>[<+>-]<<<-]"
+	factorial="+++++++++++++++++++++++++++++++++>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>++++++++++>+++++++>>+<<[>++++++++++++++++++++++++++++++++++++++++++++++++.------------------------------------------------<<<<.-.>.<.+>>>>>>>++++++++++<<[->+>-[>+>>]>[+[-<+>]>+>>]<<<<<<]>[<+>-]>[-]>>>++++++++++<[->-[>+>>]>[+[-<+>]>+>>]<<<<<]>[-]>>[++++++++++++++++++++++++++++++++++++++++++++++++.[-]]<[++++++++++++++++++++++++++++++++++++++++++++++++.[-]]<<<++++++++++++++++++++++++++++++++++++++++++++++++.[-]<<<<<<.>>+>[>>+<<-]>>[<<<[>+>+<<-]>>[<<+>>-]>-]<<<<-]";
 
 var strip,
 	index,
@@ -77,7 +79,7 @@ stopSim=function(){
 	$("#run").removeClass("disabled");
 	$("#compile").removeClass("disabled");
 
-	$("#out").html(out);
+	if(out) $("#out").html(out);
 
 	$("#alert").show(500);
 	keyFlag=keyFlags;
@@ -109,6 +111,7 @@ function run(){
 	var innerLoopCount=0;
 	var j=0,k;
 	out="";
+	console.log(main);
 	//main=document.getElementById('main').value;
 	input=document.getElementById('inp').value;
 	for(i=0;i<main.length;i++){
@@ -181,8 +184,8 @@ function run(){
 				break;
 		}
 	}
-	document.getElementById("out").innerHTML=out;
-	
+	if(out) document.getElementById("out").innerHTML=out;
+	action+=" ";
 	//Let the action begin
 	if(animFlag) stripAction(0,-1,-1,-1,0,0);
 	else stopSim();
@@ -192,29 +195,36 @@ function run(){
 stripAction=function(w,x,y,z,i,j){
 	runningFlag=true;
 	//action-w main-x  input-y out-z jumpArr-i jumpArr2-j
-	if(x>=main.length){
+	if(x>=main.length-1){
 		runningFlag=false;
 		stopSim();
 		return;
 	}
+
+	console.log(w+"-"+x+"-"+"-"+y+"-"+z+"-"+i+"-"+j);
+	if(main[x]=="\n"){
+		//donot color
+		stripAction(w,x+1,y,z,i,j);
+		return;
+	}
 	//color-main[x] input[y] and out[z] 
-	if(action[w-1]){
-		temp=action.slice(0,w-1)+"<span style='color:red;background:yellow'>"+action[w-1]+"</span>"+action.slice(w-1+1);
+	if(action[w]){
+		temp=action.slice(0,w)+"<span style='color:red;background:yellow;font-weight:bold;border-radius:100%;border:1px solid red;'>&nbsp;"+action[w]+"&nbsp;</span>"+action.slice(w+1);
 		$("#action").html(temp);
 	}
 
 	if(main[x]){
-		temp=main.slice(0,x)+"<span style='color:red;background:yellow'>"+main[x]+"</span>"+main.slice(x+1);
+		temp=main.slice(0,x)+"<span style='color:darkviolet;background:#ef6fff;font-weight:bold;border-radius:100%;border:1px solid darkviolet;'>&nbsp;"+main[x]+"&nbsp;</span>"+main.slice(x+1);
 		$("#mainDiv").html(temp.replace(/\n/g,'<br>').replace(/  /g,' &nbsp;'));
 	}
 
 	if(input[y]){
-		temp=input.slice(0,y)+"<span style='color:red;background:yellow'>"+input[y]+"</span>"+input.slice(y+1);
+		temp=input.slice(0,y)+"<span style='color:green;background:lightgreen;font-weight:bold;border-radius:100%;border:1px solid green;'>&nbsp; "+input[y]+" &nbsp;</span>"+input.slice(y+1);
 		$("#inpDiv").html(temp+"--");
 	}
 
 	if(out[z]){
-		temp=out.slice(0,z)+"<span style='color:red;background:yellow'>"+out[z]+"</span>"+out.slice(z+1);
+		temp=out.slice(0,z)+"<span style='color:blue;background:lightblue;font-weight:bold;border-radius:100%;border:1px solid blue;'>&nbsp; "+out[z]+" &nbsp;</span>"+out.slice(z+1);
 		$("#out").html(temp);
 	}
 
@@ -222,15 +232,15 @@ stripAction=function(w,x,y,z,i,j){
 	if(main[x]==']' && jumpArr[i] && x==jumpArr[i][0]){
 		//just move to jumparr[i++][1];
 		x=jumpArr[i++][1];
-		w++;
+		//w++;
 	}
 	else if(main[x]=='[' && jumpArr2[j] && x==jumpArr2[j][0]){
 		//just move to jumparr2[j++][1];
 		x=jumpArr2[j++][1];
-		w++;
+		//w++;
 	}
 	else{
-		if(action[w]==main[x+1] && main[x+1]=='.' || main[x+1]==',' ||main[x+1]=='>' || main[x+1]=='<' || main[x+1]=='+' || main[x+1]=='-'){
+		if(action[w]==main[x] && main[x]=='.' || main[x]==',' ||main[x]=='>' || main[x]=='<' || main[x]=='+' || main[x]=='-'){
 			//animate
 			a[currPos]=a[currPos]||0;
 			now=action[w];
@@ -249,10 +259,10 @@ stripAction=function(w,x,y,z,i,j){
 					break;
 				case ',':
 					set(input[y] && input[y].charCodeAt(0)||0);
-					y++;
+					//y++;
 					break;
 				case '.':
-					z++;
+					//z++;
 					break;
 				default:
 					break;
@@ -260,6 +270,13 @@ stripAction=function(w,x,y,z,i,j){
 			w++;
 		}
 		x++;
+	}
+	if(main[x] && main[x]==action[w] && main[x]=='.' || main[x]==','){
+		if (main[x]=='.') 
+			z++;
+		else if(main[x]==',')
+			y++;
+		console.log("---"+main[x])
 	}
 	t=setTimeout(function(){stripAction(w,x,y,z,i,j);},speed);
 }
@@ -342,6 +359,7 @@ singleClick=function(event){
 
 resize=function(){
 	width=$(window).width();
+	height=$(window).height();
 	//console.log(width);
 	if (width<950) $("#inp").removeClass().addClass("search-query input-small");
 	else if(width<1220) $("#inp").removeClass().addClass("input-medium search-query");
@@ -350,6 +368,10 @@ resize=function(){
 	newW=parseInt($("#cont").width()/2)-200;
 	document.getElementById("full").style.left=newW+"px";
 
+	$("#mainDiv").css('width',$("#mainWell").width());
+	$("#mainDiv").css('max-height',parseInt(height*0.9)-200);
+	$("#action").css('max-height',parseInt(height*0.30)-30);
+	//console.log($("#mainWell").css('max-height'));
 }
 
 $(window).resize(function(){
@@ -404,6 +426,7 @@ $(document).ready(function(){
 
 window.onblur=function(){
 	stopSim();
+	return;
 }
 
 resetButton=function(){

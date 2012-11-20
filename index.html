@@ -7,29 +7,29 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <script type="text/javascript" src="js/control.js"></script>
 <style type="text/css">
-//.back
+.back
 {
-overflow: none;
+overflow: hidden;
 
 //background: url(http://i312.photobucket.com/albums/ll331/superluffy/background_tile.gif) repeat;
 
 /* IE10 Consumer Preview */ 
-background-image: -ms-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
+//background-image: -ms-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
 
 /* Mozilla Firefox */ 
-background-image: -moz-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
+//background-image: -moz-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
 
 /* Opera */ 
-background-image: -o-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
+//background-image: -o-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
 
 /* Webkit (Safari/Chrome 10) */ 
-background-image: -webkit-gradient(radial, center center, 0, center center, 433, color-stop(0, #D537FC), color-stop(1, #290C30));
+//background-image: -webkit-gradient(radial, center center, 0, center center, 433, color-stop(0, #D537FC), color-stop(1, #290C30));
 
 /* Webkit (Chrome 11+) */ 
-background-image: -webkit-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
+//background-image: -webkit-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
 
 /* W3C Markup, IE10 Release Preview */ 
-background-image: radial-gradient(circle farthest-corner at center, #D537FC 0%, #290C30 100%);
+//background-image: radial-gradient(circle farthest-corner at center, #D537FC 0%, #290C30 100%);
 
 }
 </style>
@@ -133,7 +133,7 @@ z-index:
 					<input type="checkbox" value="" onclick="keyFlag=!keyFlag;"> Disable keyboard movement
 				</label>
 				<label class="checkbox">
-					<input type="checkbox" value="" onclick="$('#actionDiv').fadeToggle(600)" checked> Toggle raw-code
+					<input type="checkbox" value="" onclick="$('#action').fadeToggle(600)" checked> Toggle raw-code
 				</label>
 				<label class="checkbox" style="display:none">
 					<input type="checkbox" value="" onclick="soundFlag=!soundFlag;" checked> Disable Sound
@@ -141,9 +141,11 @@ z-index:
 			</div>
 		</div>
 		<div class="span8 well" style="word-wrap: break-word" id="mainWell">
-			<b style="position:relative;top:-5px">Code: &nbsp
+			<b style="position:relative;top:-5px">Code: &nbsp;
 				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val('').focus();"><i class="icon-remove" style="position:relative;top:-2px"></i> Clear</button>
-				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val(helloWorld).focus();">Hello World <i class="icon-qrcode" style="position:relative;top:-2px"></i></button>
+				<div class="btn-group" style="float:right;"><button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val(helloWorld).focus();">Hello World <i class="icon-qrcode" style="position:relative;top:-2px"></i></button>
+				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val(fibonacci).focus();">Fibonacci <i class="icon-qrcode" style="position:relative;top:-2px"></i></button>
+				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val(factorial).focus();">Factorial <i class="icon-qrcode" style="position:relative;top:-2px"></i></button></div>
 			</b> 
 			<textarea id="main" rows="10" placeholder="The Brain Fuck Code goes here..." style="width:97%;font-size:15px;font-family:Verdana;"></textarea>
 			<br><div id="mainDiv" style="display:none;font-size: 15px; font-family: Verdana;position:relative;top:5px;left:8px;word-wrap: break-word;overflow: auto"></div>
@@ -158,17 +160,17 @@ z-index:
 
 			<div class="span3 well" style="min-height:60px" id="outDiv">
 				<label><b>Output:</b></label><hr>
-				<div id="out">&nbsp;</div><hr>
+				<div id="out">.</div><hr>
 
-				<iframe onload="$(this).width(parseInt($('#outDiv').width()));" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffestalize.com%2FbfVisual&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=segoe+ui&amp;height=21&amp;appId=526351877380323" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+				<iframe onload="$(this).width(parseInt($('#outDiv').width()));" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffestalize.com%2FbfVisual&amp;send=false&amp;layout=standard&amp;width=160&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=segoe+ui&amp;height=80&amp;appId=526351877380323" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
 				<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-size="small" data-via="bigOmega" data-url="http://festalize.com/bfVisual/" data-text="BrainFuck Compiling Visualization/Simulation in JavaScript">Tweet</a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 			</div>
 
-			<div class="span3 well" style="min-height:60px" id="actionDiv">
-				<label><b>Raw Code: (without looping)</b></label><span style="font-style:italic;">
-				<div id="action" style="font-size: 15px; font-family: Verdana;word-wrap: break-word;overflow: auto">
-				</div></span>
+			<div class="span3 well" style="min-height:60px;" id="actionDiv" onclick="$('#action').fadeToggle(600)">
+				<label><b>Raw Code: (without looping)</b></label>
+				<div id="action" style="font-size: 15px; font-family: Verdana;word-wrap: break-word;overflow: auto;max-height:260px" >
+				</div>
 			</div>
 		</div>
 	</div>
