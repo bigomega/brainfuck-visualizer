@@ -1,0 +1,369 @@
+textarea { 
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+span.ascii3
+{
+	position:relative;
+	top:12px;
+	left:0px;
+	font-size:23px;
+}
+
+span.ascii2
+{
+	position:relative;
+	top:12px;
+	left:9px;
+	font-size:23px;
+}
+
+span.ascii1
+{
+	position:relative;
+	top:12px;
+	left:14px;
+	font-size:23px;
+}
+
+div.bar_end_l
+{
+	position: absolute;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll 0px -553px transparent;
+	height:57px;
+	width:13px;
+}
+div.bar_end_r
+{
+	position: absolute;
+	left:370px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll 0px -553px transparent;
+	height:57px;
+	width:13px;
+}
+
+div.strip_shade_l
+{
+	position:absolute;
+	top:7px;
+	z-index:5;
+	background: url('../images/sprite.png') no-repeat scroll -350px -553px transparent;height:45px;width:27px;
+	//border:1px solid black;
+}
+
+div.strip_shade_r
+{
+	position:absolute;
+	top:7px;
+	right:0px;
+	z-index:5;
+	background: url('../images/sprite.png') no-repeat scroll -530px 0px transparent;
+	height:45px;
+	width:27px;
+	//border:1px solid black;
+}
+
+div.mark
+{
+//	border:1px solid black;
+	position: absolute;
+	left:160px;
+	top:-3px;
+	background: url('../images/sprite.png') no-repeat scroll -286px -553px transparent;
+	height:60px;
+	width:60px;
+	z-index:5;
+}
+div.strip
+{
+	position: relative;
+	float: left;
+	top:6px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') scroll -243px -553px transparent;
+	height:45px;
+	width:40px;
+}
+div.number1
+{
+	position: relative;
+	float:left;
+	top:6px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -291px -275px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.number11
+{
+	position: relative;
+	float:left;
+	top:6px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -251px -275px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.number12
+{
+	position: relative;
+	float:left;
+	top:6px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -211px -275px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.number13
+{
+	position: relative;
+	float:left;
+	top:6px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -171px -275px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.number14
+{
+	position: relative;
+	float:left;
+	top:6px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -131px -275px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+div.number0
+{
+	position: relative;
+	float:left;
+	top:7px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -721px 0px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.number01
+{
+	position: relative;
+	float:left;
+	top:7px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -681px 0px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.number02
+{
+	position: relative;
+	float:left;
+	top:7px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -641px 0px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.number03
+{
+	position: relative;
+	float:left;
+	top:7px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -601px 0px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.number04
+{
+	position: relative;
+	float:left;
+	top:7px;
+//	border:1px solid black;
+	background: url('../images/sprite.png') no-repeat scroll -561px 0px transparent;
+	height:45px;
+	width:40px;
+//	z-index:4;
+}
+
+div.left_button
+{
+	position:absolute;
+	background: url('../images/sprite.png') no-repeat scroll -280px -330px transparent;
+	height:36px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.right_button
+{
+	position:absolute;
+	background: url('../images/sprite.png') no-repeat scroll -245px -330px transparent;
+	height:36px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.one_button
+{
+	position:absolute;
+	background: url('../images/sprite.png') no-repeat scroll -315px -330px transparent;
+	height:36px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.zero_button
+{
+	position:absolute;
+	background: url('../images/sprite.png') no-repeat scroll -351px -330px transparent;
+	height:36px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.null_button
+{
+	position:absolute;
+	background: url('../images/sprite.png') no-repeat scroll 0px -330px transparent;
+	height:36px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+
+div.left_button_pressing
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -280px -421px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.right_button_pressing
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -245px -421px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.one_button_pressing
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -315px -421px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.zero_button_pressing
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -351px -421px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.null_button_pressing
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -0px -421px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.left_button_pressed
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -280px -510px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.right_button_pressed
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -245px -510px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.one_button_pressed
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -315px -510px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.zero_button_pressed
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -351px -510px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}
+
+div.null_button_pressed
+{
+	position:absolute;
+	top:1px;
+	background: url('../images/sprite.png') no-repeat scroll -0px -510px transparent;
+	height:35px;
+	width:34px;
+	cursor:pointer;
+	//border:1px solid black;
+}

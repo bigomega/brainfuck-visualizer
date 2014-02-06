@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/control.js"></script>
+<style type="text/css">
+.back
+{
+overflow: hidden;
+
+//background: url(http://i312.photobucket.com/albums/ll331/superluffy/background_tile.gif) repeat;
+
+/* IE10 Consumer Preview */ 
+//background-image: -ms-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
+
+/* Mozilla Firefox */ 
+//background-image: -moz-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
+
+/* Opera */ 
+//background-image: -o-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+//background-image: -webkit-gradient(radial, center center, 0, center center, 433, color-stop(0, #D537FC), color-stop(1, #290C30));
+
+/* Webkit (Chrome 11+) */ 
+//background-image: -webkit-radial-gradient(center, circle farthest-corner, #D537FC 0%, #290C30 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+//background-image: radial-gradient(circle farthest-corner at center, #D537FC 0%, #290C30 100%);
+
+}
+</style>
+</head>
+<body class="back">
+
+<div class="navbar navbar-static-top">
+	<div class="navbar-inner">
+		<a class="brand" href="#">BrainFuck Compiling Visualization</a>
+		<ul class="nav">
+			<li class="active"><a href="https://github.com/bfVisual"><i class="icon-align-left"></i> CoDe</a></li>
+			<li><a href="http://big0mega.tumblr.com"><i class="icon-book"></i> bLoG</a></li>
+			<li class="active"><a href="http://twitter.com/bigOmega"><i class="icon-user"></i> AuTh<blink style="text-decoration:blink">Ω</blink>r</a></li>
+		</ul>
+		<ul class="nav pull-right">
+			<li><a href="#" onclick="$('#keys').toggle(1000);"><small>KeyBoard Help</small></a></li>
+		</ul>
+	</div>
+</div>
+<br>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="row-fluid">
+			<div class="span9">
+			<div class="row-fluid">
+			<div class="span4 well" id="inpWell">
+				<label onclick="document.getElementById('inp').disabled=!document.getElementById('inp').disabled;"><b>Input:</b></label>
+    			<form class="form-search" id="inpForm">
+    				<div class="input-append">
+						<input type="text" id="inp" class="search-query" placeholder="Input values..."/>
+    					<a class="add-on btn" href="#" onclick="$('#inp').val('').focus();"><i class="icon-remove"></i></a>    
+    				</div>
+    			</form>
+    			<div id="inpDiv" style="display:none;position:relative;top:5px;left:16px"></div>
+			</div>
+			<div id="cont" class="span8 well">
+
+<div id="full" style="position:relative;">
+<!--
+<div id="Logo"></div>
+<img src="images/plogo.png" width="250px" style="position:relative;left:75px"/>
+-->
+<div id="bar" style="position:absolute;">
+<!--
+z-index:
+5 : marker and end shade
+4 : numbers on strip // changed: the stip itself is changed(class) in case of a number
+3 : strip
+2 : the strip holes
+-->
+<div class="bar_end_l"></div>
+<div class="bar_end_r"></div>
+<div class="mark"></div>
+
+<div id="linestrip" style="position:absolute;left:6px;height:52px;width:371px;overflow:hidden;z-index:3;//border:1px solid black"><!--9x40=360(371) total. -->
+	<div class="strip_shade_l"></div>
+	<div class="strip_shade_r"></div>
+	<div id="mover" style="position:absolute;left:-35px;display:inline;width:800px;height:52px;//border:1px solid red">
+	<!-- size 4on either side, 4x40=160(-5 for view).to move on left:left-=40px right:left+=40px-->
+	<!--for numbers just change the class to number1 or number0-->
+
+	<!-- the number of strips always remain 9 -->
+	<div id="s-5" class="strip"></div>
+	<div id="s-4" class="strip"></div>
+	<div id="s-3" class="strip"></div>
+	<div id="s-2" class="strip"></div>
+	<div id="s-1" class="strip"></div>
+	<div id="s0" class="strip"></div><!--mid-->
+	<div id="s1" class="strip"></div>
+	<div id="s2" class="strip"></div>
+	<div id="s3" class="strip"></div>
+	<div id="s4" class="strip"></div>
+	<div id="s5" class="strip"></div>
+	
+	</div>
+</div>
+</div>
+
+</div>
+<!-- END OF FULL STRIP-->
+<br/>.<br/>.
+			</div>
+
+		</div>
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="well" style="width:70%;position:relative;left:30px">
+				<button onclick="runReset();" class="btn btn-large btn-success" id="run">Compile and Animate</button><br><br>
+				<button class="btn btn-danger" onclick="stopSim();">Stop simulation</button><br><br>
+				<button class="btn btn-mini btn-info" onclick="animFlag=false;runReset();" id="compile">Only Compile and Run</button><br><br>
+				<button class="btn btn-mini btn-inverse disabled" id="reset" onclick="reset(5);">Reset Strip</button><br><br>
+				Animation Speed: <div class="input-append">
+					<input class="span6" type="text" placeholder="1000" id="speed">
+					<span class="add-on"> mSec</span>
+				</div>
+				<label class="checkbox">
+					<input type="checkbox" value="" checked="checked" onclick="resetButton();"> Auto-Reset strip every-time
+				</label>
+				<label class="checkbox" id="keyFlag">
+					<input type="checkbox" value="" onclick="keyFlag=!keyFlag;"> Disable keyboard movement
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" value="" onclick="$('#action').fadeToggle(600)" checked> Toggle raw-code
+				</label>
+				<label class="checkbox" style="display:none">
+					<input type="checkbox" value="" onclick="soundFlag=!soundFlag;" checked> Disable Sound
+				</label>
+			</div>
+		</div>
+		<div class="span8 well" style="word-wrap: break-word" id="mainWell">
+			<b style="position:relative;top:-5px">Code: &nbsp;
+				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val('').focus();"><i class="icon-remove" style="position:relative;top:-2px"></i> Clear</button>
+				<div class="btn-group" style="float:right;"><button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val(helloWorld).focus();">Hello World <i class="icon-qrcode" style="position:relative;top:-2px"></i></button>
+				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val(fibonacci).focus();">Fibonacci <i class="icon-qrcode" style="position:relative;top:-2px"></i></button>
+				<button class="btn btn-mini" style="position:relative;top:-2px" onclick="$('#main').val(factorial).focus();">Factorial <i class="icon-qrcode" style="position:relative;top:-2px"></i></button></div>
+			</b> 
+			<textarea id="main" rows="10" placeholder="The Brain Fuck Code goes here..." style="width:97%;font-size:15px;font-family:Verdana;"></textarea>
+			<br><div id="mainDiv" style="display:none;font-size: 15px; font-family: Verdana;position:relative;top:5px;left:8px;word-wrap: break-word;overflow: auto"></div>
+			<br>
+			<div class="alert" id="alert">
+				<button type="button" class="close" data-dismiss="alert" onclick="$(this).parent().hide(500);">×</button>
+				<strong>Warning!</strong> Check your code before running, inifinite looping will slow/stop the browser.
+    		</div>
+		</div>
+	</div>
+	</div>
+
+			<div class="span3 well" style="min-height:60px" id="outDiv">
+				<label><b>Output:</b></label><hr>
+				<div id="out">.</div><hr>
+
+				<iframe onload="$(this).width(parseInt($('#outDiv').width()));" src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffestalize.com%2FbfVisual&amp;send=false&amp;layout=standard&amp;width=160&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=segoe+ui&amp;height=80&amp;appId=526351877380323" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-size="small" data-via="bigOmega" data-url="http://festalize.com/bfVisual/" data-text="BrainFuck Compiling Visualization/Simulation in JavaScript">Tweet</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			</div>
+
+			<div class="span3 well" style="min-height:60px;" id="actionDiv" onclick="$('#action').fadeToggle(600)">
+				<label><b>Raw Code: (without looping)</b></label>
+				<div id="action" style="font-size: 15px; font-family: Verdana;word-wrap: break-word;overflow: auto;max-height:260px" >
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--
+<div style="position:fixed;right:10px;top:40%;width:20%;background-color: #F5F5F5;border: 1px solid #E3E3E3;border-radius: 4px 4px 4px 4px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) inset; margin-bottom: 20px; min-height: 20px; padding: 19px;opacity:0.8">
+	podapoadaa
+</div>
+-->
+
+
+<!-- Help
+<div id='help' style='font-family:"Lucida Console", Times, serif;background:;border:2px solid black;border-radius:10px;position:fixed;top:100px;right:0px;z-index:-5;opacity:0.9;'><br>
+	<span style='font-family:"Verdana", Times, serif;font-weight:bold'> &nbsp Use Mouse click or Keyboard</span><br><br> &nbsp 
+	<img src="images/left.png" height="25px"> : Move Left<br><br> &nbsp 
+	<img src="images/right.png" height="25px"> :  Move Right<br><br> &nbsp 
+	<img src="images/up.png" height="25px"> : Write One<br><br> &nbsp 
+	<img src="images/down.png" height="25px"> : Write Zero<br><br> &nbsp 
+	<img src="images/space.png" height="25px"> : Clear Memory <br> &nbsp 
+</div>
+-->
+
+
+<div class="well" style="position:fixed;top:0px;right:0px;display:none;border-radius:17px" onclick="$(this).toggle(1000)" id="keys">
+	<table cellpadding="5px">
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-arrow-left"></i></button></td>
+			<td> Move left (&lt;)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-arrow-right"></i></button></td>
+			<td> Move Right (&gt;)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-arrow-up"></i></button></td>
+			<td> Add (+)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-arrow-down"></i></button></td>
+			<td> Subtract (-)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini"><i class="icon-eject" style="position:relative;top:-2px;"></i> Shift &nbsp; &nbsp; </button></td>
+			<td> Get Input (,)</td>
+		</tr>
+		<tr>
+			<td><button class="btn btn-mini">Ctrl</button></td>
+			<td> Print output (.)</td>
+		</tr>
+	</table>
+</div>
+
+<br/><br>
+
+<audio hidden="true" id="typeS"><source src="audio/typewriter-key-1.mp3"></source><source src="audio/typewriter-key-1.ogg"></source></audio>
+<audio hidden="true" id="moveS"><source src="audio/typewriter-return-1.mp3"></source><source src="audio/typewriter-return-1.ogg"></source></audio>
+<audio hidden="true" id="clearS"><source src="audio/typewriter-paper-1.mp3"></source><source src="audio/typewriter-paper-1.ogg"></source><embed src="audio/typewriter-paper-1.mp3" autoplay="true" hidden="true"/></audio>
+
+
+</body>
+</html>
