@@ -1,25 +1,7 @@
-#BRAIN FACK
-#####A mind fucking [programming language](https://en.wikipedia.org/wiki/Brainfuck) that's fucking [turing complete](https://en.wikipedia.org/wiki/Turing_completeness)
+# BRAIN FUDGE
+## [DEMO](https://bharathraja.in/brainfuck-visualizer/)
+The simplest programming language ([wiki](https://en.wikipedia.org/wiki/Brainfuck)) that's fukcing [turing complete](https://en.wikipedia.org/wiki/Turing_completeness)
 
-##[awesome DEMO](http://bigomega.github.io/bfVisual)
-of the Fucked up language interpretation
+Sprites borrowed (ahem ahem) from [Google doodle](https://www.google.com/doodles/alan-turings-100th-birthday)
 
-##[Follow](http://twitter.com/bigomega)
-my updates on Twitter
-
-                        ___
-                       /   \
-                      |     |
-                      |     |
-                      |     |
-                      |     |
-           ___________|     |___________
-          /                             \
-         |                               |__
-         |                               |   \
-         |                               |     \
-         |                               |       \
-         |                                       |
-         |                                      /
-         \                                    /
-          \                                  /
+![image](https://user-images.githubusercontent.com/2320747/138085263-4355c9f0-29fa-4a2b-a5cd-9033e56fb6d4.png)
